@@ -1,0 +1,183 @@
+/* Colors: UW purple and gold. Gold is decorative only (low contrast on white). */
+:root {
+  --purple: #4b2e83;
+  --purple-dark: #32006e;
+  --purple-tint: #f3effa;
+  --gold: #b7a57a;
+  --ink: #1d1d1f;
+  --muted: #4a4a55;
+  --line: #dcd8e4;
+  --bg: #ffffff;
+  --bg-soft: #f7f6fa;
+  --radius: 10px;
+  --wrap: 1080px;
+  --font: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 17px/1.65 var(--font);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+img { max-width: 100%; height: auto; }
+a { color: var(--purple); text-underline-offset: 2px; }
+a:hover { color: var(--purple-dark); }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+.wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 16px; }
+
+.skip-link {
+  position: absolute; left: -9999px; top: 8px;
+  background: #fff; color: var(--purple); padding: 8px 12px; border-radius: 6px; z-index: 100;
+}
+.skip-link:focus { left: 8px; }
+
+/* ---------- Header and navigation ---------- */
+.site-header {
+  background: var(--purple);
+  color: #fff;
+  border-bottom: 4px solid var(--gold);
+  position: sticky; top: 0; z-index: 50;
+}
+.header-inner { display: flex; align-items: center; gap: 24px; min-height: 68px; }
+.brand { color: #fff; text-decoration: none; display: flex; flex-direction: column; line-height: 1.2; flex-shrink: 0; }
+.brand:hover { color: #fff; }
+.brand-name { font-weight: 700; font-size: 1.1rem; }
+.brand-sub { font-size: 0.8rem; opacity: 0.9; }
+
+.site-nav { margin-left: auto; }
+.nav-list { list-style: none; margin: 0; padding: 0; display: flex; align-items: stretch; gap: 2px; }
+.nav-item { position: relative; display: flex; align-items: center; }
+.nav-item > a {
+  color: #fff; text-decoration: none; font-weight: 600; font-size: 0.95rem;
+  padding: 10px 12px; border-radius: 6px; white-space: nowrap;
+}
+.nav-item > a:hover { background: rgba(255, 255, 255, 0.14); color: #fff; }
+.nav-item.is-active > a { box-shadow: inset 0 -3px 0 var(--gold); border-radius: 6px 6px 0 0; }
+
+.sub-toggle {
+  background: none; border: 0; color: #fff; cursor: pointer;
+  width: 28px; height: 36px; margin-left: -8px; border-radius: 6px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.sub-toggle span {
+  width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: translateY(-2px) rotate(45deg); transition: transform 0.15s;
+}
+.sub-toggle:hover { background: rgba(255, 255, 255, 0.14); }
+.sub-open .sub-toggle span { transform: translateY(2px) rotate(-135deg); }
+
+.sub-list {
+  list-style: none; margin: 0; padding: 8px;
+  position: absolute; top: 100%; left: 0; min-width: 300px;
+  background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: 0 12px 32px rgba(30, 10, 60, 0.18);
+  display: none;
+}
+.has-sub:hover .sub-list,
+.has-sub:focus-within .sub-list,
+.has-sub.sub-open .sub-list { display: block; }
+.sub-list a {
+  display: flex; gap: 10px; align-items: baseline;
+  color: var(--ink); text-decoration: none; padding: 8px 10px; border-radius: 6px; font-size: 0.95rem;
+}
+.sub-list a:hover { background: var(--purple-tint); color: var(--purple-dark); }
+.sub-list a[aria-current="page"] { background: var(--purple-tint); color: var(--purple-dark); font-weight: 600; }
+.num {
+  flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--purple); color: #fff; font-size: 0.75rem; font-weight: 700;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+
+.menu-toggle {
+  display: none; margin-left: auto;
+  background: transparent; color: #fff; border: 2px solid rgba(255, 255, 255, 0.7);
+  border-radius: 6px; padding: 6px 14px; font: 600 0.95rem var(--font); cursor: pointer;
+}
+
+@media (max-width: 960px) {
+  .header-inner { flex-wrap: wrap; gap: 0; padding-top: 10px; padding-bottom: 10px; }
+  .menu-toggle { display: block; }
+  .site-nav { display: none; width: 100%; margin: 10px 0 4px; }
+  .site-nav.is-open { display: block; }
+  .nav-list { flex-direction: column; gap: 2px; }
+  .nav-item { flex-wrap: wrap; }
+  .nav-item > a { flex: 1; padding: 10px 8px; }
+  .nav-item.is-active > a { box-shadow: inset 4px 0 0 var(--gold); border-radius: 0; }
+  .sub-toggle { display: none; }
+  .sub-list, .has-sub:hover .sub-list {
+    display: block; position: static; width: 100%; min-width: 0;
+    background: transparent; border: 0; box-shadow: none; padding: 0 0 6px 16px;
+  }
+  .sub-list a { color: #fff; padding: 6px 8px; }
+  .sub-list a:hover, .sub-list a[aria-current="page"] { background: rgba(255, 255, 255, 0.14); color: #fff; }
+  .num { background: #fff; color: var(--purple); }
+}
+
+/* ---------- Main content ---------- */
+.main { flex: 1; padding-top: 40px; padding-bottom: 64px; }
+h1, h2, h3 { line-height: 1.25; color: var(--purple-dark); }
+h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin: 0 0 12px; }
+h2 { font-size: 1.5rem; margin: 48px 0 12px; padding-bottom: 6px; border-bottom: 2px solid var(--line); }
+h3 { font-size: 1.15rem; margin: 28px 0 8px; }
+.lead { font-size: 1.15rem; color: var(--muted); max-width: 760px; margin-top: 0; }
+.eyebrow {
+  display: inline-block; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--purple); margin-bottom: 6px;
+}
+
+.status-note {
+  border-left: 4px solid var(--gold); background: var(--bg-soft);
+  padding: 12px 16px; border-radius: 0 var(--radius) var(--radius) 0; color: var(--muted); max-width: 760px;
+}
+
+.breadcrumb { font-size: 0.9rem; color: var(--muted); margin-bottom: 18px; display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* Cards (landing page and Developer's Perspective overview) */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 24px 0; padding: 0; list-style: none; }
+.card {
+  display: block; height: 100%; text-decoration: none; color: var(--ink);
+  background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--purple);
+  border-radius: var(--radius); padding: 18px 20px; transition: box-shadow 0.15s, transform 0.15s;
+}
+.card:hover { color: var(--ink); box-shadow: 0 8px 24px rgba(30, 10, 60, 0.12); transform: translateY(-2px); }
+.card h3 { margin: 0 0 6px; color: var(--purple-dark); }
+.card p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+.card .go { display: inline-block; margin-top: 10px; font-weight: 600; color: var(--purple); font-size: 0.95rem; }
+
+.theme-list { list-style: none; padding: 0; margin: 24px 0; counter-reset: theme; }
+.theme-list li { border-bottom: 1px solid var(--line); }
+.theme-list a { display: flex; gap: 16px; padding: 16px 4px; text-decoration: none; color: var(--ink); align-items: flex-start; }
+.theme-list a:hover { background: var(--bg-soft); }
+.theme-list .num { width: 30px; height: 30px; font-size: 0.9rem; margin-top: 2px; }
+.theme-list strong { display: block; color: var(--purple-dark); font-size: 1.08rem; }
+.theme-list span.blurb { color: var(--muted); font-size: 0.95rem; }
+
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 28px 0; }
+.stat { background: var(--purple-tint); border-radius: var(--radius); padding: 14px 16px; }
+.stat b { display: block; font-size: 1.7rem; color: var(--purple-dark); line-height: 1.1; }
+.stat span { color: var(--muted); font-size: 0.9rem; }
+
+figure { margin: 32px 0; }
+figure img { border: 1px solid var(--line); border-radius: var(--radius); background: #fff; }
+figcaption { color: var(--muted); font-size: 0.92rem; margin-top: 8px; max-width: 760px; }
+
+.pager { display: flex; justify-content: space-between; gap: 16px; margin-top: 56px; flex-wrap: wrap; }
+.pager a {
+  flex: 1 1 240px; border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 12px 16px; text-decoration: none; font-weight: 600;
+}
+.pager a span { display: block; font-size: 0.8rem; font-weight: 400; color: var(--muted); }
+.pager-next { text-align: right; margin-left: auto; }
+.pager a:hover { background: var(--bg-soft); }
+
+/* ---------- Footer ---------- */
+.site-footer { background: var(--bg-soft); border-top: 1px solid var(--line); color: var(--muted); font-size: 0.9rem; }
+.footer-inner { display: flex; justify-content: space-between; gap: 8px 24px; flex-wrap: wrap; padding-top: 18px; padding-bottom: 18px; }
+.footer-inner p { margin: 0; }

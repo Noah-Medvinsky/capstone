@@ -1,0 +1,38 @@
+# Main navigation. The five top-level labels are required by the course.
+# Developer's Perspective themes are in building-knowledge order; the last one must be
+# "Next Steps" (or "Conclusion").
+- title: Capstone
+  url: /
+- title: User’s Perspective
+  url: /users-perspective/
+- title: Developer’s Perspective
+  url: /developers-perspective/
+  children:
+    - title: The Problem and the Data
+      url: /developers-perspective/problem-and-data/
+      blurb: What a transcription factor is, the ChIP-seq data, and how train, validation, and test sets stay separate.
+    - title: The Motif Baseline (PWM)
+      url: /developers-perspective/pwm-baseline/
+      blurb: Scoring sequences against known JASPAR motifs, the classical approach.
+    - title: The Deep Learning Models
+      url: /developers-perspective/models/
+      blurb: The one-hot CNN, the pretrained HyenaDNA model, and how both feed the same network.
+    - title: Reproducing the Paper
+      url: /developers-perspective/reproduction/
+      blurb: Matching Tang et al. (2025), and what it took to get within 0.005 of their results.
+    - title: Comparing the Methods
+      url: /developers-perspective/comparison/
+      blurb: Ten transcription factors, three methods, and bootstrap confidence intervals.
+    - title: Error Analysis
+      url: /developers-perspective/error-analysis/
+      blurb: Where each method fails, and why a motif alone is not enough.
+    - title: Testing and Reproducibility
+      url: /developers-perspective/testing/
+      blurb: Automated tests, data-leakage checks, and a repository anyone can re-run.
+    - title: Next Steps
+      url: /developers-perspective/next-steps/
+      blurb: What I would do with more time, and where the project goes after the quarter.
+- title: My Perspective
+  url: /my-perspective/
+- title: Annotated Bibliography
+  url: /annotated-bibliography/
